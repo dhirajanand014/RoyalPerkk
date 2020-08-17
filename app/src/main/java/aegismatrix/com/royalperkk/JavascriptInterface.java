@@ -5,10 +5,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
@@ -62,6 +64,20 @@ public class JavascriptInterface {
                     "xhr.send();";
         }
         return "javascript: alert('File : Royal Perkk " + FILENAME + " Cannot be downloaded);";
+    }
+
+    @android.webkit.JavascriptInterface
+    public void checkAndSaveDetails(String inUserName, String inPassword) {
+        if (!TextUtils.isEmpty(inUserName) && !TextUtils.isEmpty(inPassword)) {
+            String prefName = context.getResources().getString(R.string.royal_perkk_user_prefs);
+            SharedPreferences sharedPreferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+            if (!sharedPreferences.contains(inUserName) || !sharedPreferences.getString(inUserName, "").equals(inPassword)) {
+                SharedPreferences.Editor sharedPreferencesEdit = sharedPreferences.edit();
+                sharedPreferencesEdit.clear();
+                sharedPreferencesEdit.putString(inUserName, inPassword);
+                sharedPreferencesEdit.apply();
+            }
+        }
     }
 
     /**
