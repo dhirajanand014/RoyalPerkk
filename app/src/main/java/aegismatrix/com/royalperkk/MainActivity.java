@@ -51,7 +51,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 public class MainActivity extends AppCompatActivity implements Observer {
     private static final int INPUT_FILE_REQUEST_CODE = 1;
     private static final int FILECHOOSER_RESULTCODE = 1;
-    private static final String URL = "https://www.royalperkk.com/";
+    private static final String URL = "https://royalperkk.com/dsa/dashboard";
     private String downloadUrl = "";
     public static final int REQUEST_CODE = 111;
     private WebView webView;
